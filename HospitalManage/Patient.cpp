@@ -3,11 +3,20 @@
 #include <fstream>
 using namespace std;
 
-int Patient::idCounter = 0;
 
-Patient::Patient(const string& name, int age, const string& condition, int urgency)
-    : name(name), age(age), condition(condition), urgency(urgency) {
-    id = ++idCounter;
+int Patient::nextId = 1;
+
+// מטופל חדש – מקבל ID אוטומטי
+Patient::Patient(const std::string& name, int age, const std::string& injury, int urgency)
+    : id(nextId++), name(name), age(age), injury(injury), urgency(urgency) {
+}
+
+// מטופל משוחזר מקובץ – עם ID קיים
+Patient::Patient(int id, const std::string& name, int age, const std::string& injury, int urgency)
+    : id(id), name(name), age(age), injury(injury), urgency(urgency) {
+    if (id >= nextId) {
+        nextId = id + 1; // דואגים שהמונה לא ידרוך אחורה
+    }
 }
 
 /*UrgencyLevel::Level Patient::getUrgency() const {

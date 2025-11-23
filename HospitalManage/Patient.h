@@ -15,6 +15,7 @@ private:
 
 public:
     Patient(const string& name, int age, const string& condition, int urgency);
+    Patient(int id, const std::string& name, int age, const std::string& injury, int urgency);
 
     string getName() const;
     int getAge() const;
@@ -22,6 +23,7 @@ public:
     string getCondition() const;
     int getUrgency() const;
     string toCSV() const;
+    static void setNextId(int value);
 };
 
 #endif
